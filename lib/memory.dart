@@ -5,6 +5,7 @@ class Memory {
   int bufferIndex = 0;
   final buffer = [0.0, 0.0];
   String result = '0';
+  String operationDo = '';
 
   Memory() {
     clear();
@@ -62,24 +63,28 @@ class Memory {
   }
 
   double calculate() {
+    double calc = 0.0;
     switch (operator) {
       case '%':
-        operator = null;
-        return (buffer[0] / 100) * buffer[1];
+        calc = (buffer[0] / 100) * buffer[1];
+        break;
       case '/':
-        operator = null;
-        return buffer[0] / buffer[1];
+        calc = buffer[0] / buffer[1];
+        break;
       case 'x':
-        operator = null;
-        return buffer[0] * buffer[1];
+        calc = buffer[0] * buffer[1];
+        break;
       case '-':
-        operator = null;
-        return buffer[0] - buffer[1];
+        calc = buffer[0] - buffer[1];
+        break;
       case '+':
-        operator = null;
-        return buffer[0] + buffer[1];
+        calc = buffer[0] + buffer[1];
+        break;
       default:
-        return  double.parse(result);
+        calc = double.parse(result);
+        break;
     }
+    operator = null;
+    return calc;
   }
 }
