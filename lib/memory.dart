@@ -12,7 +12,7 @@ class Memory {
   }
 
   void applyCommand(String command) {
-    if (command == 'AC') {
+    if (command == 'C') {
       clear();
     } else if (command == 'DEL') {
       deleteLastDigit();
@@ -45,6 +45,7 @@ class Memory {
     }
 
     if (operator != '=') this.operator = operator;
+
     result = buffer[0].toString();
     result = result.endsWith('.0') ? result.split('.')[0] : result;
 

@@ -15,12 +15,42 @@ class CalculatorState extends State<Calculator> {
   Widget build(BuildContext buildContext) {
     return Scaffold(
         backgroundColor: Colors.black,
-        body: Column(children: <Widget>[buildDisplay(), buildKeyboard()]));
+        body: Column(children: <Widget>[buildOperationDoDisplay(), buildDisplay(), buildKeyboard()]));
+  }
+
+  Widget buildOperationDoDisplay() {
+    return Expanded(
+        flex: 2,
+        child: Container(
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AutoSizeText(
+                  memory.operationDo,
+                    minFontSize: 20.0,
+                    maxFontSize: 40.0,
+                    maxLines: 1,
+                    textAlign: TextAlign.end,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w200,
+                        decoration: TextDecoration.none,
+                        fontSize: 80.0,
+                        color: Colors.white60)
+                ),
+              )
+            ],
+          ),
+        )
+    );
   }
 
   Widget buildDisplay() {
     return Expanded(
-        flex: 1,
+        flex: 0,
         child: Container(
           color: Colors.black,
           child: Column(
@@ -41,7 +71,8 @@ class CalculatorState extends State<Calculator> {
                           color: Colors.white)))
             ],
           ),
-        ));
+        )
+    );
   }
 
   Widget buildKeyboardButton(String label,
@@ -51,19 +82,20 @@ class CalculatorState extends State<Calculator> {
     return Expanded(
         flex: flex,
         child: Container(
-          margin: const EdgeInsets.only(bottom: 10.0),
+          margin: const EdgeInsets.only(bottom: 20.0),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   foregroundColor: textColor,
                   backgroundColor: backgroundColor,
                   shape: const CircleBorder()),
-              child: Text(label, style: const TextStyle(fontSize: 30)),
+              child: Text(label, style: const TextStyle(fontSize: 40)),
               onPressed: () {
                 setState(() {
                   memory.applyCommand(label);
                 });
               }),
-        ));
+        )
+    );
   }
 
   Widget buildKeyboardButtonZero(String label,
@@ -73,19 +105,20 @@ class CalculatorState extends State<Calculator> {
     return Expanded(
         flex: flex,
         child: Container(
-          margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10.0),
+          margin: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   foregroundColor: textColor,
                   backgroundColor: backgroundColor,
                   shape: const StadiumBorder()),
-              child: Text(label, style: const TextStyle(fontSize: 30)),
+              child: Text(label, style: const TextStyle(fontSize: 40)),
               onPressed: () {
                 setState(() {
                   memory.applyCommand(label);
                 });
               }),
-        ));
+        )
+    );
   }
 
   Widget buildKeyboardButtonIcon(IconData icon, String label,
@@ -95,7 +128,7 @@ class CalculatorState extends State<Calculator> {
     return Expanded(
         flex: flex,
         child: Container(
-          margin: const EdgeInsets.only(bottom: 10.0),
+          margin: const EdgeInsets.only(bottom: 20.0),
           decoration: ShapeDecoration(
               color: backgroundColor, shape: const CircleBorder()),
           child: IconButton(
@@ -109,21 +142,22 @@ class CalculatorState extends State<Calculator> {
                   memory.applyCommand(label);
                 });
               }),
-        ));
+        )
+    );
   }
 
   Widget buildKeyboard() {
     return Container(
         color: Colors.black,
-        height: 450.0,
+        height: 550.0,
         child: Column(children: <Widget>[
           Expanded(
               flex: 1,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  buildKeyboardButton('AC',
-                      textColor: Colors.black38,
+                  buildKeyboardButton('C',
+                      textColor: Colors.redAccent,
                       backgroundColor: const Color(0xffFFE0CA)),
                   buildKeyboardButtonIcon(CupertinoIcons.delete_left, 'DEL',
                       textColor: Colors.black38,
@@ -134,7 +168,8 @@ class CalculatorState extends State<Calculator> {
                   buildKeyboardButtonIcon(CupertinoIcons.divide, '/',
                       backgroundColor: const Color(0xffFFA15F)),
                 ],
-              )),
+              )
+          ),
           Expanded(
               flex: 1,
               child: Row(
@@ -145,7 +180,9 @@ class CalculatorState extends State<Calculator> {
                     buildKeyboardButton('9'),
                     buildKeyboardButtonIcon(CupertinoIcons.xmark, 'x',
                         backgroundColor: const Color(0xffFFA15F)),
-                  ])),
+                  ]
+              )
+          ),
           Expanded(
               flex: 1,
               child: Row(
@@ -156,7 +193,9 @@ class CalculatorState extends State<Calculator> {
                     buildKeyboardButton('6'),
                     buildKeyboardButtonIcon(CupertinoIcons.minus, '-',
                         backgroundColor: const Color(0xffFFA15F)),
-                  ])),
+                  ]
+              )
+          ),
           Expanded(
               flex: 1,
               child: Row(
@@ -177,7 +216,11 @@ class CalculatorState extends State<Calculator> {
                     buildKeyboardButton('.'),
                     buildKeyboardButtonIcon(CupertinoIcons.equal, '=',
                         backgroundColor: const Color(0xffFFA15F)),
-                  ]))
-        ]));
+                  ]
+              )
+          )
+        ]
+        )
+    );
   }
 }
